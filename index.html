@@ -11,6 +11,7 @@
     .container {
       display: flex;
       height: 100vh;
+      flex-direction: row;
     }
 
     .left {
@@ -26,18 +27,26 @@
 
     .left h1 {
       font-size: 36px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+
+    .countdown {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #f7253f;
+      font-weight: bold;
     }
 
     .left p {
       font-size: 16px;
       line-height: 1.6;
-      max-width: 400px;
+      max-width: 450px;
       margin-bottom: 30px;
     }
 
     .buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 15px;
     }
 
@@ -77,6 +86,16 @@
       }
       .right {
         height: 40vh;
+        order: -1;
+      }
+      .left {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+      }
+      .socials {
+        position: static;
+        margin-top: 40px;
       }
     }
   </style>
@@ -84,9 +103,9 @@
 <body>
   <div class="container">
     <div class="left">
-      <h1>Launching Soon</h1>
-      <h1>00 Days 00:00:00</h1>
-      <p>Elev8Digitol is almost here — a digital marketing agency built to elevate brands through strategy, design, and digital innovation. Stay tuned for the future of digital engagement.</p>
+      <h1>Elev8Digitol</h1>
+      <div class="countdown" id="countdown">Loading countdown...</div>
+      <p>We're launching soon — a digital marketing agency built to elevate brands through strategy, design, and innovation. Stay tuned for the future of digital engagement.</p>
       <div class="buttons">
         <a href="#info">More Information</a>
         <a href="#subscribe" class="subscribe">Subscribe Now</a>
@@ -97,5 +116,30 @@
     </div>
     <div class="right"></div>
   </div>
+
+  <script>
+    // Set launch date (YYYY-MM-DD format)
+    const launchDate = new Date("2025-08-10T00:00:00").getTime();
+
+    const countdown = document.getElementById("countdown");
+
+    const updateCountdown = setInterval(() => {
+      const now = new Date().getTime();
+      const timeLeft = launchDate - now;
+
+      if (timeLeft <= 0) {
+        clearInterval(updateCountdown);
+        countdown.innerHTML = "We are now live!";
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `${days} Days ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
 </body>
 </html>

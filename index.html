@@ -1,70 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elev8Digitol | Coming Soon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elev8Digitol - Coming Soon</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; font-family: 'Segoe UI', sans-serif; }
+
     .container {
-      max-width: 600px;
-      padding: 20px;
+      display: flex;
+      height: 100vh;
     }
-    h1 {
-      font-size: 3em;
+
+    .left {
+      background: #0d0d0d;
+      color: white;
+      flex: 1;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .left h1 {
+      font-size: 36px;
       margin-bottom: 20px;
     }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 40px;
+
+    .left p {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 30px;
     }
-    .email-input {
-      padding: 10px;
-      width: 70%;
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .buttons a {
+      padding: 12px 20px;
+      border: 2px solid white;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .buttons a.subscribe {
+      background-color: #f7253f;
       border: none;
-      border-radius: 4px;
-      margin-right: 10px;
     }
-    .notify-btn {
-      padding: 10px 20px;
-      background-color: #00adb5;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
+
+    .buttons a:hover {
+      background-color: #ffffff20;
     }
-    .notify-btn:hover {
-      background-color: #008891;
-    }
-    .footer {
+
+    .socials {
       position: absolute;
-      bottom: 20px;
-      font-size: 0.9em;
-      color: #ccc;
+      bottom: 40px;
+      left: 40px;
+      font-size: 14px;
+    }
+
+    .right {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1484980972926-edee96e0960d?auto=format&fit=crop&w=800&q=80') center center / cover no-repeat;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .right {
+        height: 40vh;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Elev8Digitol</h1>
-    <p>We are crafting something amazing. Our digital marketing agency will launch soon. Stay tuned!</p>
-    <form>
-      <input type="email" class="email-input" placeholder="Enter your email" required>
-      <button class="notify-btn" type="submit">Notify Me</button>
-    </form>
-    <div class="footer">&copy; 2025 Elev8Digitol. All rights reserved.</div>
+    <div class="left">
+      <h1>Launching Soon</h1>
+      <h1>00 Days 00:00:00</h1>
+      <p>Elev8Digitol is almost here — a digital marketing agency built to elevate brands with strategy, design, and creativity. Stay tuned as we launch the next-level digital experience.</p>
+      <div class="buttons">
+        <a href="#info">More Information</a>
+        <a href="#subscribe" class="subscribe">Subscribe Now</a>
+      </div>
+      <div class="socials">
+        © 2024 Elev8Digitol
+      </div>
+    </div>
+    <div class="right"></div>
   </div>
 </body>
 </html>

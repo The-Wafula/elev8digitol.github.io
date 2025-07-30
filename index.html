@@ -1,145 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Elev8Digitol - Coming Soon</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { height: 100%; font-family: 'Segoe UI', sans-serif; }
-
-    .container {
-      display: flex;
-      height: 100vh;
-      flex-direction: row;
-    }
-
-    .left {
-      background: #0d0d0d;
-      color: white;
-      flex: 1;
-      padding: 60px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    .left h1 {
-      font-size: 36px;
-      margin-bottom: 15px;
-    }
-
-    .countdown {
-      font-size: 28px;
-      margin-bottom: 25px;
-      color: #f7253f;
-      font-weight: bold;
-    }
-
-    .left p {
-      font-size: 16px;
-      line-height: 1.6;
-      max-width: 450px;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .buttons a {
-      padding: 12px 20px;
-      border: 2px solid white;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .buttons a.subscribe {
-      background-color: #f7253f;
-      border: none;
-    }
-
-    .buttons a:hover {
-      background-color: #ffffff20;
-    }
-
-    .socials {
-      position: absolute;
-      bottom: 40px;
-      left: 40px;
-      font-size: 14px;
-    }
-
-    .right {
-      flex: 1;
-      background: url('https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1000&q=80') center center / cover no-repeat;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-      .right {
-        height: 40vh;
-        order: -1;
-      }
-      .left {
-        padding: 40px 20px;
-        text-align: center;
-        align-items: center;
-      }
-      .socials {
-        position: static;
-        margin-top: 40px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>elev8Digitol - Elevate Your Brand</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+        /* Custom styles for subtle effects not easily done with Tailwind utilities alone */
+        .hero-text-clip {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        .reveal-text span {
+            display: inline-block;
+            overflow: hidden;
+        }
+        .reveal-text span span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <div class="left">
-      <h1>Elev8Digitol</h1>
-      <div class="countdown" id="countdown">Loading countdown...</div>
-      <p>We're launching soon — a digital marketing agency built to elevate brands through strategy, design, and innovation. Stay tuned for the future of digital engagement.</p>
-      <div class="buttons">
-        <a href="#info">More Information</a>
-        <a href="#subscribe" class="subscribe">Subscribe Now</a>
-      </div>
-      <div class="socials">
-        © 2025 Elev8Digitol. All rights reserved.
-      </div>
-    </div>
-    <div class="right"></div>
-  </div>
+<body class="bg-gray-50 text-gray-800">
 
-  <script>
-    // Set launch date (YYYY-MM-DD format)
-    const launchDate = new Date("2025-08-10T00:00:00").getTime();
+    <!-- Header -->
+    <header class="absolute top-0 left-0 w-full z-50 py-4 px-6 md:px-12 lg:px-24">
+        <nav class="flex justify-between items-center">
+            <div class="text-3xl font-extrabold text-indigo-700 logo-text">elev8Digitol</div>
+            <ul class="hidden md:flex space-x-8 text-lg font-medium nav-links">
+                <li><a href="#about" class="hover:text-indigo-600 transition duration-300">About</a></li>
+                <li><a href="#services" class="hover:text-indigo-600 transition duration-300">Services</a></li>
+                <li><a href="#work" class="hover:text-indigo-600 transition duration-300">Work</a></li>
+                <li><a href="#testimonials" class="hover:text-indigo-600 transition duration-300">Testimonials</a></li>
+                <li><a href="#contact" class="hover:text-indigo-600 transition duration-300">Contact</a></li>
+            </ul>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white bg-opacity-95 z-40 hidden flex flex-col items-center justify-center space-y-8 text-2xl font-semibold transform translate-x-full transition-transform duration-300 ease-in-out">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-800 focus:outline-none">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <a href="#about" class="hover:text-indigo-600 nav-link-mobile">About</a>
+            <a href="#services" class="hover:text-indigo-600 nav-link-mobile">Services</a>
+            <a href="#work" class="hover:text-indigo-600 nav-link-mobile">Work</a>
+            <a href="#testimonials" class="hover:text-indigo-600 nav-link-mobile">Testimonials</a>
+            <a href="#contact" class="hover:text-indigo-600 nav-link-mobile">Contact</a>
+        </div>
+    </header>
 
-    const countdown = document.getElementById("countdown");
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center text-center overflow-hidden bg-gradient-to-br from-indigo-50 to-purple-100">
+            <div class="container mx-auto px-6 z-10">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 leading-tight mb-6 reveal-text">
+                    <span><span>Elevate Your Brand</span></span>
+                    <span><span>Through Digital</span></span>
+                    <span><span>Excellence.</span></span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 mb-10 opacity-0 hero-subtitle">
+                    Strategy. Design. Innovation. Your digital journey starts here.
+                </p>
+                <a href="#contact" class="inline-block bg-indigo-600 text-white text-xl font-semibold py-4 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 hero-button">
+                    Get a Free Consultation
+                </a>
+            </div>
+            <!-- Background elements for visual appeal -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <div class="absolute w-48 h-48 bg-purple-300 rounded-full blur-3xl top-1/4 left-1/4 animate-blob"></div>
+                <div class="absolute w-64 h-64 bg-indigo-300 rounded-full blur-3xl bottom-1/3 right-1/4 animate-blob animation-delay-2000"></div>
+                <div class="absolute w-56 h-56 bg-pink-300 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-blob animation-delay-4000"></div>
+            </div>
+        </section>
 
-    const updateCountdown = setInterval(() => {
-      const now = new Date().getTime();
-      const timeLeft = launchDate - now;
+        <!-- About Us Section -->
+        <section id="about" class="py-20 md:py-32 bg-white scroll-section">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 fade-in-left">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Who We Are</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            elev8Digitol is a cutting-edge digital marketing agency dedicated to helping brands thrive in the ever-evolving digital landscape. We combine strategic thinking with creative design and innovative technologies to deliver measurable results.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Our team of experts is passionate about crafting unique digital experiences that resonate with your audience and drive growth. We believe in building long-term partnerships based on trust, transparency, and shared success.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 fade-in-right">
+                        <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Creative+Team" alt="Our Creative Team" class="rounded-xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      if (timeLeft <= 0) {
-        clearInterval(updateCountdown);
-        countdown.innerHTML = "We are now live!";
-        return;
-      }
+        <!-- Services Section -->
+        <section id="services" class="py-20 md:py-32 bg-gradient-to-r from-indigo-50 to-purple-50 scroll-section">
+            <div class="container mx-auto px-6 md:px-12 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 fade-in-up">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Service Card 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Digital Strategy</h3>
+                        <p class="text-gray-600">Developing comprehensive digital roadmaps tailored to your business goals.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Web Design & Development</h3>
+                        <p class="text-gray-600">Crafting stunning, user-friendly websites that convert visitors into customers.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">SEO & Content Marketing</h3>
+                        <p class="text-gray-600">Boosting your online visibility and attracting organic traffic with valuable content.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857m7.5 1.857A2.75 2.75 0 0013.5 12H11a2.75 2.75 0 00-2.75 2.75V15h2.25m2.25 0h2.25m-4.5 0v2.25m0 2.25h2.25M12 12h.01"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Social Media Management</h3>
+                        <p class="text-gray-600">Engaging your audience and building community across all major social platforms.</p>
+                    </div>
+                    <!-- Service Card 5 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Paid Advertising (PPC)</h3>
+                        <p class="text-gray-600">Maximizing your ROI with targeted and optimized paid advertising campaigns.</p>
+                    </div>
+                    <!-- Service Card 6 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 service-card">
+                        <div class="text-indigo-600 mb-4">
+                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2h.01M10 21h4m-4 0v-2a2 2 0 012-2h2a2 2 0 012 2v2m-7-2h7"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Analytics & Reporting</h3>
+                        <p class="text-gray-600">Providing clear insights and transparent reports to track your progress.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        <!-- Work/Portfolio Section -->
+        <section id="work" class="py-20 md:py-32 bg-white scroll-section">
+            <div class="container mx-auto px-6 md:px-12 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 fade-in-up">Our Recent Work</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Project Card 1 -->
+                    <div class="bg-gray-100 rounded-xl shadow-lg overflow-hidden work-card">
+                        <img src="https://placehold.co/600x400/6366F1/FFFFFF?text=Project+Alpha" alt="Project Alpha" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">E-commerce Revamp</h3>
+                            <p class="text-gray-600">Transformed an online store into a high-converting e-commerce platform.</p>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="bg-gray-100 rounded-xl shadow-lg overflow-hidden work-card">
+                        <img src="https://placehold.co/600x400/A78BFA/FFFFFF?text=Project+Beta" alt="Project Beta" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">SaaS Lead Generation</h3>
+                            <p class="text-gray-600">Implemented a full-funnel strategy, increasing leads by 150%.</p>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="bg-gray-100 rounded-xl shadow-lg overflow-hidden work-card">
+                        <img src="https://placehold.co/600x400/C084FC/FFFFFF?text=Project+Gamma" alt="Project Gamma" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">Brand Awareness Campaign</h3>
+                            <p class="text-gray-600">Launched a viral social media campaign reaching millions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      countdown.innerHTML = `${days} Days ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  </script>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 md:py-32 bg-gradient-to-l from-indigo-50 to-purple-50 scroll-section">
+            <div class="container mx-auto px-6 md:px-12 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 fade-in-up">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Testimonial Card 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-left testimonial-card">
+                        <p class="text-gray-700 text-lg italic mb-6">"elev8Digitol transformed our online presence. Their strategic approach and creative execution exceeded all our expectations. Highly recommend!"</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=JD" alt="Client Avatar" class="w-16 h-16 rounded-full mr-4 object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-900 text-xl">Jane Doe</p>
+                                <p class="text-gray-500">CEO, Tech Solutions Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial Card 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-left testimonial-card">
+                        <p class="text-gray-700 text-lg italic mb-6">"Their team is incredibly knowledgeable and responsive. We saw a significant increase in our lead generation within the first few months. A true partner!"</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=AS" alt="Client Avatar" class="w-16 h-16 rounded-full mr-4 object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-900 text-xl">Alex Smith</p>
+                                <p class="text-gray-500">Marketing Director, Global Brands</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action / Contact Section -->
+        <section id="contact" class="py-20 md:py-32 bg-indigo-700 text-white text-center scroll-section">
+            <div class="container mx-auto px-6 md:px-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 fade-in-up">Ready to Elevate Your Brand?</h2>
+                <p class="text-xl md:text-2xl mb-10 opacity-0 contact-subtitle">
+                    Let's discuss how we can help you achieve your digital marketing goals.
+                </p>
+                <a href="mailto:info@elev8digitol.com" class="inline-block bg-white text-indigo-700 text-xl font-semibold py-4 px-8 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 contact-button">
+                    Contact Us Today
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 px-6 md:px-12 text-center">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="text-2xl font-extrabold text-white mb-4 md:mb-0">elev8Digitol</div>
+                <ul class="flex space-x-6 text-lg">
+                    <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition duration-300">Terms of Service</a></li>
+                </ul>
+            </div>
+            <p class="text-sm">&copy; 2025 elev8Digitol. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP and ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Custom JavaScript for animations -->
+    <script src="script.js"></script>
 </body>
 </html>
